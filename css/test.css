@@ -1,0 +1,232 @@
+#timeline {
+    display: flex;
+    background-color: #7e7474;
+  
+    &:hover {
+      .tl-item {
+        width: 23.3333%;
+      }
+    }
+  }
+  
+  .tl-item {
+    transform: translate3d(0, 0, 0);
+    position: relative;
+    width: 25%;
+    height: 100vh;
+    min-height: 600px;
+    color: #fff;
+    overflow: hidden;
+    transition: width 0.5s ease;
+  
+    &:before,
+    &:after {
+      transform: translate3d(0, 0, 0);
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  
+    &:after {
+      background: transparentize(#e0251b, 0.15);
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+  
+    &:before {
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 75%
+      );
+      z-index: 1;
+      opacity: 0;
+      transform: translate3d(0, 0, 0) translateY(50%);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+  
+    &:hover {
+      width: 30% !important;
+  
+      &:after {
+        opacity: 0;
+      }
+  
+      &:before {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) translateY(0);
+        transition: opacity 1s ease, transform 1s ease 0.25s;
+      }
+  
+      .tl-content {
+        opacity: 1;
+        transform: translateY(0);
+        transition: all 0.75s ease 0.5s;
+      }
+  
+      .tl-bg {
+        filter: grayscale(0);
+      }
+    }
+  }
+  
+  .tl-content {
+    transform: translate3d(0, 0, 0) translateY(25px);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin: 0 1.618em;
+    top: 55%;
+    opacity: 0;
+  
+    h1 {
+      font-family: "Pathway Gothic One", Helvetica Neue, Helvetica, Arial,
+        sans-serif;
+      text-transform: uppercase;
+      color: #1779cf;
+      font-size: 1.44rem;
+      
+    }
+  }
+  
+  .tl-year {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 1;
+    border-bottom: 1px solid #fff;
+  
+    p {
+      font-family: "Pathway Gothic One", Helvetica Neue, Helvetica, Arial,
+        sans-serif;
+      font-size: 1.728rem;
+      line-height: 0;
+    }
+  }
+  
+  .tl-bg {
+    transform: translate3d(0, 0, 0);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center center;
+    transition: filter 0.5s ease;
+    filter: grayscale(100%);
+  }
+
+  .button {
+    --width: 200px;
+    --height: 50px;
+    --tooltip-height: 35px;
+    --tooltip-width: 90px;
+    --gap-between-tooltip-to-button: 18px;
+    --button-color: #1163ff;
+    --tooltip-color: #fff;
+    width: var(--width);
+    height: var(--height);
+    background: var(--button-color);
+    position: relative;
+    text-align: center;
+    border-radius: 0.45em;
+    font-family: "Arial";
+    transition: background 0.3s;
+  }
+  
+  .button::before {
+    position: absolute;
+    content: attr(data-tooltip);
+    width: var(--tooltip-width);
+    height: var(--tooltip-height);
+    background-color: var(--tooltip-color);
+    font-size: 0.9rem;
+    color: #111;
+    border-radius: .25em;
+    line-height: var(--tooltip-height);
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 10px);
+    left: calc(50% - var(--tooltip-width) / 2);
+  }
+  
+  .button::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: var(--tooltip-color);
+    left: calc(50% - 10px);
+    bottom: calc(100% + var(--gap-between-tooltip-to-button) - 10px);
+  }
+  
+  .button::after,.button::before {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+  }
+  
+  .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button-wrapper,.text,.icon {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    color: #fff;
+  }
+  
+  .text {
+    top: 0
+  }
+  
+  .text,.icon {
+    transition: top 0.5s;
+  }
+  
+  .icon {
+    color: #fff;
+    top: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .button:hover {
+    background: #6c18ff;
+  }
+  
+  .button:hover .text {
+    top: -100%;
+  }
+  
+  .button:hover .icon {
+    top: 0;
+  }
+  
+  .button:hover:before,.button:hover:after {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .button:hover:after {
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
+  }
+  
+  .button:hover:before {
+    bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+  }
